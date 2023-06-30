@@ -181,7 +181,7 @@ ing request was received.
     <b>Payment #1.&nbsp;</b>
     <b>Ridebooker Order ID:&nbsp;</b>
     ORDER_ID&nbsp;,
-    $105.00 CAD,&nbsp;
+    $124.95 CAD,&nbsp;
     </u>
 <br/>
 Transactions:<br/>
@@ -189,7 +189,7 @@ Transactions:<br/>
 
     <li> <b> Transaction Date & Time: </b> TRANSACTION_DATETIME_LOCAL=
  </li><li> <b> Transaction: </b>TRANSACTION_ID </li><li> <b> C=
-harge Total: </b>$105 </li><li> <b> Cardholder: </b>Stefan Koch</li><li> <b=
+harge Total: </b>$124.95 </li><li> <b> Cardholder: </b>Stefan Koch</li><li> <b=
 > Card reference: </b>7510</li></ul>
     <hr/>
            =20
@@ -208,16 +208,16 @@ harge Total: </b>$105 </li><li> <b> Cardholder: </b>Stefan Koch</li><li> <b=
 <tr>
     <td>Adult*  (13+)</td>
     <td>x 1</td>
-    <td>x $75.00 CAD</td>
-    <td>=3D $75.00 CAD</td>
+    <td>x $79.00 CAD</td>
+    <td>=3D $79.00 CAD</td>
 </tr>
                    =20
        =20
                                     <tr>
     <td>OTHER_LOCATIONS</td>
     <td>x 1</td>
-    <td>x $25.00 CAD</td>
-    <td>=3D $25.00 CAD</td>
+    <td>x $40.00 CAD</td>
+    <td>=3D $40.00 CAD</td>
 </tr>
 
 
@@ -225,19 +225,19 @@ harge Total: </b>$105 </li><li> <b> Cardholder: </b>Stefan Koch</li><li> <b=
        =20
         <tr>
             <td colspan=3D"3" align=3D"right">Sub Total:&nbsp;</td>
-            <td>$100.00 CAD</td>
+            <td>$119.00 CAD</td>
         </tr>
 
        =20
        =20
         <tr>
             <td colspan=3D"3" align=3D"right">Tax (GST):&nbsp;</td>
-            <td>$5.00 CAD</td>
+            <td>$5.95 CAD</td>
         </tr>
 
         <tr>
             <td colspan=3D"3" align=3D"right">Total:&nbsp;</td>
-            <td>$105.00 CAD</td>
+            <td>$124.95 CAD</td>
         </tr>
         <tr>
             <td colspan=3D"4">&nbsp;</td>
