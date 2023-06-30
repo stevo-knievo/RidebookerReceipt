@@ -1,0 +1,13 @@
+Hi,
+here is your order with the id: ORDER_ID.
+
+Order Id: ORDER_ID
+Transaction: TRANSACTION_ID
+Transaction date time: TRANSACTION_DATETIME_LOCAL
+Direction: TRAVEL_DIRECTION
+Other Locations: OTHER_LOCATIONS
+
+Email meta data datetime local: EMAIL_META_DATA_DATETIME_LOCAL
+Email meta data datetime utc: EMAIL_META_DATA_DATETIME_UTC
+
+Thanks!

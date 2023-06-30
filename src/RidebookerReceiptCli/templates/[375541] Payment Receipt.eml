@@ -1,0 +1,288 @@
+Delivered-To: hello.stefan.koch@gmail.com
+Received: by 2002:ab4:9985:0:0:0:0:0 with SMTP id n5csp773485ecy;
+        Wed, 18 May 2022 16:27:55 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJyzOKcbpgg7DeOhWLHnEnrxJ4tQPy0Bs8mk10o5edB3x4irJmCqTl+KYk2Zi247SfvMKbdh
+X-Received: by 2002:ac8:5953:0:b0:2f3:dd32:cca0 with SMTP id 19-20020ac85953000000b002f3dd32cca0mr1950568qtz.610.1652916474979;
+        Wed, 18 May 2022 16:27:54 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1652916474; cv=none;
+        d=google.com; s=arc-20160816;
+        b=CcWsLSOj0Kr0Bn0OPDnKDrtoNiw6gr7stEegDGRnMiILnc9fC3hZRMvqWwNmR4Mcuh
+         DoMGRhnHtiR0AW1luAEgo6SnTBEOoN49/5JJrXbOpMVg93ZnXFwaER/1oA5kudTz31tk
+         Ag2cHgjhRppLbvBofp1Pvc3Tii6FAJoUyCDfTH2hesjTtVkPuWcD497N6CapLhw5eF+/
+         ZMZkwrIbdyz1WuFY+qfEUxaCeqaC2MnglMQaTGrUdpV1g8w6hgImatJeQpvM+6DSUd/V
+         GygPZn0TW5g0ouuhal15sWb/TVARA740qm2yJzIPsYQ1G0D7bjb7n2Kq3b75FKtwQwCC
+         fOvQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=content-transfer-encoding:to:mime-version:from:subject:date
+         :message-id:dkim-signature:dkim-signature;
+        bh=LOBZ5N561HA20rbbFcU/Z2DmpoBywqpdCAUOo4So8TQ=;
+        b=0eWt4zKxj52VzrU4VOIu/eAVshP6lUYgmUS3QrfhRDZis5jIsOsMLKhoCTAjHOHeO7
+         q++QkMK7z46S1qC0Mgs6VmrI8K4U+SgMMw/sVgsBbtCXVcqzIKt/gxItp/vKAeqKsb0x
+         UuuN7i8gc3ErxY/JF6Ux863cHZB6t9IcqCqojTcLcSc58/3Z1nw+pTlU627sM/ZEHaAv
+         cut1+Q0sFuBBhS63jn2QimRRWhjZ6ObmKbxEHoDP0gQNZyK2hlXlSyNfWnJpVBXdxjvX
+         Fvtinh1IhC3tHlS1t7sYtUPFskxcKdrOEA6UJUkKnGMFj1fr2YF3efczeKIbqoR1VS4w
+         3t9g==
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@ridebooker.com header.s=s1 header.b=Oxo4mR2E;
+       dkim=pass header.i=@sendgrid.info header.s=smtpapi header.b="WpJyT/Vp";
+       spf=pass (google.com: domain of bounces+1445548-380c-hello.stefan.koch=gmail.com@outbound.ridebooker.com designates 168.245.37.184 as permitted sender) smtp.mailfrom="bounces+1445548-380c-hello.stefan.koch=gmail.com@outbound.ridebooker.com"
+Return-Path: <bounces+1445548-380c-hello.stefan.koch=gmail.com@outbound.ridebooker.com>
+Received: from o1.sendgrid1.ridebooker.com (o1.sendgrid1.ridebooker.com. [168.245.37.184])
+        by mx.google.com with ESMTPS id h12-20020a05620a284c00b0069fcf7580e8si432589qkp.260.2022.05.18.16.27.54
+        for <hello.stefan.koch@gmail.com>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 18 May 2022 16:27:54 -0700 (PDT)
+Received-SPF: pass (google.com: domain of bounces+1445548-380c-hello.stefan.koch=gmail.com@outbound.ridebooker.com designates 168.245.37.184 as permitted sender) client-ip=168.245.37.184;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@ridebooker.com header.s=s1 header.b=Oxo4mR2E;
+       dkim=pass header.i=@sendgrid.info header.s=smtpapi header.b="WpJyT/Vp";
+       spf=pass (google.com: domain of bounces+1445548-380c-hello.stefan.koch=gmail.com@outbound.ridebooker.com designates 168.245.37.184 as permitted sender) smtp.mailfrom="bounces+1445548-380c-hello.stefan.koch=gmail.com@outbound.ridebooker.com"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ridebooker.com;
+	h=subject:from:mime-version:x-feedback-id:to:content-type:
+	content-transfer-encoding;
+	s=s1; bh=LOBZ5N561HA20rbbFcU/Z2DmpoBywqpdCAUOo4So8TQ=;
+	b=Oxo4mR2Eic/lC40/BiaCLul4pgS+jelsZStnMiofrw1snW3uLdMCSIeKQ1WatgYpno3Y
+	uqgL24GUwygbogu3m74j/DYp52wIxllxlN3k6Y5E5PEJ5DqZuglEkTPjTf+OhhAmMM6zby
+	g1mA5AxYcY8BKl4dEIE7tGe0Ia50eHRZqLATiuYC2TWSi/pDHFULq7A4D1rUBnThNyhR98
+	D1M+SdCb3S/klvrI+YFdM7NUVtTwWGYc/Dg9dBZ5GV3OzkGhnJ/mJX4ItmCxnf/pKIQQrF
+	2NLbuo4Gi0RXp5RzJxoNB7lEnXwg7fyOdQvrmKc8W2U5xE9YNchsibCuyxCtnGHw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sendgrid.info;
+	h=subject:from:mime-version:x-feedback-id:to:content-type:
+	content-transfer-encoding;
+	s=smtpapi; bh=LOBZ5N561HA20rbbFcU/Z2DmpoBywqpdCAUOo4So8TQ=;
+	b=WpJyT/VpOnf9+wCRFxtRmYYGbLa0r8NEI7Eo6Sds9sOtjbXxTxTh9madC6e6tsVdKX1J
+	37j9Zlo2IGATroZIYUUIS1pvpeQ3/sFdjGWVBKAkDh1K2xncv280v2STehlSLvr47vG174
+	s0ZFO9zLUS4Uv6ibZ06pnZXWG6CEZogkw=
+Received: by filterdrecv-74cbf9986b-tq2gs with SMTP id filterdrecv-74cbf9986b-tq2gs-1-628580FA-2D
+        2022-05-18 23:27:54.658554782 +0000 UTC m=+3634998.191200739
+Received: from prod-server-2.ridebooker.com (unknown)
+	by geopod-ismtpd-2-0 (SG) with ESMTP id FzF_-RuNTwG4zhhv4n82tA
+	for <hello.stefan.koch@gmail.com>; Wed, 18 May 2022 23:27:54.541 +0000 (UTC)
+Received: from www.ridebooker.com (localhost [127.0.0.1])
+	by prod-server-2.ridebooker.com (Postfix) with ESMTP id 4869B88152
+	for <hello.stefan.koch@gmail.com>; Wed, 18 May 2022 23:27:54 +0000 (UTC)
+Message-ID: <29124745d27997291e789be645c3ad31@www.ridebooker.com>
+Date: Wed, 18 May 2022 23:27:54 +0000 (UTC)
+Subject: [375541] Payment Receipt
+From: Ridebooker <info@ridebooker.com>
+MIME-Version: 1.0
+X-Feedback-ID: 1445548:SG
+X-SG-EID: 
+ =?us-ascii?Q?ii8hNEmwlJW0FqzxLYTDXyJ0ky1Z0wNkPSTU37jsp8RvW+gu=2F2GLUrjgCo9Fm0?=
+ =?us-ascii?Q?u6pgpwfRZ8SIQM14jpfsoHPVjSxuoQTLA93HsyS?=
+ =?us-ascii?Q?HbnderftcYmP2tnXrKfTszwP0kDRJzSTQCu3tjt?=
+ =?us-ascii?Q?49y3v=2FUNPoxiNi9FpbiNyUiaxJgPwrjNoYs59t2?=
+ =?us-ascii?Q?9d2ex3t0ztM9r8HaWg5SvtU+pqLL3pnnooL=2Fw+X?=
+ =?us-ascii?Q?PN69mN+J3cVFxO8WrBI3EvSOYu85Eu=2FsoXwrHW?=
+To: Stefan Koch <hello.stefan.koch@gmail.com>
+X-Entity-ID: BCDxct/N4IZelE6IE8pnZA==
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns=3D"http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3DUTF-8=
+"/>
+    <title>[375541] Payment Receipt</title>
+    <style type=3D"text/css">
+    <!--
+    body {
+        font-family: Geneva, Arial, Helvetica, sans-serif;
+    }
+
+    td.label, th {
+        text-align: right;
+        vertical-align: baseline;
+        font-weight: bold;
+        width: 30%;
+    }
+
+    td.info, td {
+        text-align: left;
+    }
+
+    table.outlined td, table.outlined th {
+        border-width: 1px;
+        border-style: solid;
+        border-color: #CCCCCC;
+        border-collapse: collapse;
+        padding: 5px;
+    }
+
+    table.outlined th {
+        text-align: right;
+        vertical-align: baseline;
+        font-weight: bold;
+        width: 30%;
+    }
+
+    table.outlined td {
+        text-align: left;
+    }
+
+    th.trip_title {
+        text-align: left;
+        background-color: #99CC00;
+    }
+
+    .grey {
+        background-color: #6787B0;
+        color: #FFFFFF;
+    }
+
+    table.outlined {
+        border: 3px solid #CCCCCC;
+        width: 90%;
+    }
+
+    p, td, th, h1, h2, h3, h4, table {
+        font-family: Geneva, Arial, Helvetica, sans-serif;
+    }
+
+    h1 {
+        color: #FF6600;
+    }
+
+    .red {
+        color: #FF6600;
+    }
+
+    .green {
+        color: #99CC00;
+    }
+
+    -->
+</style>
+</head>
+<body>
+<h3>
+    This is your credit card receipt. This is NOT your confirmation email.
+</h3>
+<h3>
+    We're busy confirming your booking details with our transportation part=
+ners. We'll be sending an official confirmation email that contains detaile=
+d pickup instructions and confirmation numbers as soon as everything is con=
+firmed.
+</h3>
+<h3>
+    The confirmation process can take anywhere between 15 minutes and 48 ho=
+urs depending on the complexity of your trip(s) and the time that your book=
+ing request was received.
+</h3>
+
+<p>Dear Stefan Koch,</p>
+<p>Thanks you for your recent booking via Ridebooker.com!</p>
+
+    <h3>Payment Details:</h3>
+                <hr/>
+<u>
+    <b>Payment #1.&nbsp;</b>
+    <b>Ridebooker Order ID:&nbsp;</b>
+    375541&nbsp;,
+    $105.00 CAD,&nbsp;
+    </u>
+<br/>
+Transactions:<br/>
+    <ul>
+
+    <li> <b> Transaction Date & Time: </b> 18 May 2022, 4:27 PM (16:27) PDT=
+ </li><li> <b> Transaction: </b>pi_2L0wH09pgrPvd9vM17DXzDtl </li><li> <b> C=
+harge Total: </b>$105 </li><li> <b> Cardholder: </b>Stefan Koch</li><li> <b=
+> Card reference: </b>7510</li></ul>
+    <hr/>
+           =20
+<h3>Booked By</h3>
+<ul>
+    <li>Stefan Koch</li>
+</ul>
+
+<h3>Charges Summary</h3>
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"5" class=3D"outlined">
+                    <tr>
+            <td colspan=3D"4"><b>1. Whistler Shuttle | Vancouver Airport (Y=
+VR) to Whistler</b></td>
+        </tr>
+
+                                   =20
+<tr>
+    <td>Adult*  (13+)</td>
+    <td>x 1</td>
+    <td>x $75.00 CAD</td>
+    <td>=3D $75.00 CAD</td>
+</tr>
+                   =20
+       =20
+                                    <tr>
+    <td>&quot;Other Locations&quot; Dropoff Service Per Trip</td>
+    <td>x 1</td>
+    <td>x $25.00 CAD</td>
+    <td>=3D $25.00 CAD</td>
+</tr>
+
+
+                   =20
+       =20
+        <tr>
+            <td colspan=3D"3" align=3D"right">Sub Total:&nbsp;</td>
+            <td>$100.00 CAD</td>
+        </tr>
+
+       =20
+       =20
+        <tr>
+            <td colspan=3D"3" align=3D"right">Tax (GST):&nbsp;</td>
+            <td>$5.00 CAD</td>
+        </tr>
+
+        <tr>
+            <td colspan=3D"3" align=3D"right">Total:&nbsp;</td>
+            <td>$105.00 CAD</td>
+        </tr>
+        <tr>
+            <td colspan=3D"4">&nbsp;</td>
+        </tr>
+   =20
+   =20
+</table>
+
+    <h3>Driver Gratuity</h3>
+    <p>Driver gratuities are NOT included in your payment unless specifical=
+ly stated as a line item above. A tip of
+        10-15% is customary in Canada for private transfer drivers. <strong=
+>Please do consider tipping your driver
+            10-15% for good service!</strong></p>
+
+<h3>Other Questions?</h3>
+<p>If you have any questions, or your plans change, please send an email to=
+ <a href=3D"mailto:info@ridebooker.com">info@ridebooker.com</a></p>
+<h3>Cancellation Policy</h3>
+<p>If you need to cancel your ticket, please do so at least 24 hours in adv=
+ance of your trip=E2=80=99s departure time to receive a 100% refund.</p>
+<h3>Terms &amp; Conditions</h3>
+<p>Please read our full <a href=3D"http://sendgrid2.ridebooker.com/ls/click=
+?upn=3D4aG9kyWl6aAYpWzyF1-2FOofim4e7KOcD89L9MYiXtUzYkpadQSlN9hXWhaVimdiuniO=
+VO_LzR2meyeFq0Z83dQjnbByNCLRtH-2Bx4lIL1ARE-2BtmN-2BT-2FS2TsarMJafbUQgLoDKsY=
+UbWDveVQn-2FpcXoPa70nLgtdsPaPUvidDXmJytb02xIhppwPMimYsIfeAFibRlf4j0BBk9xiMI=
+d7r8ywnZt3ZkXI5-2FwsubGchOs-2Bl99m4-2B1-2BkQD-2FiMS7rB-2FvOVDvVg1G-2Bmt0T-2=
+FH-2B41EUF9Y5pLLT5eV3kAAEMpVVKWt6kGR5AiPE-3D">TERMS &amp; CONDITIONS (CANCE=
+LLATION POLICY)</a></p>
+<p>
+    <a href=3D"mailto:info@ridebooker.com">info@ridebooker.com</a><br/>
+    <a href=3D"tel:18669430516">+1 (866) 943 0516</a> (North America)<br/>
+    <a href=3D"tel:16046395050">+1 (604) 639 5050</a> (International)<br/>
+</p>
+
+<p>Canadian GST# 853478410</p>
+<img src=3D"http://sendgrid2.ridebooker.com/wf/open?upn=3DTXuou2BPEllmlERaR=
+qRErgQR4MTuusyYK45mXD155ME7RKpilZ35Eb9OJk3y57eYhbcd4GeVhI4Ky77ZIaoJc5UpYE-2=
+BjAVIhRzXZ5kBuDGUFWuIwMKsEsYSy0T9rVeX41cc4ekROEwDVRXysfvPgknsg1iAfDbtxOmVdL=
+hTz-2FLQ1JwVnCMY3EdaNOU4c8tJWeoAbC4wEvz6eC4sn5Yi1NNEqPcAVJm-2BM03omayskF-2F=
+s-3D" alt=3D"" width=3D"1" height=3D"1" border=3D"0" style=3D"height:1px !i=
+mportant;width:1px !important;border-width:0 !important;margin-top:0 !impor=
+tant;margin-bottom:0 !important;margin-right:0 !important;margin-left:0 !im=
+portant;padding-top:0 !important;padding-bottom:0 !important;padding-right:=
+0 !important;padding-left:0 !important;"/></body>
+</html>
+
