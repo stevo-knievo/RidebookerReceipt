@@ -21,29 +21,33 @@ public class ReceiptBuilder : IReceiptBuilder
             .Replace(ReplaceConstance.OrderId, orderId)
             .Replace(ReplaceConstance.TransactionId, option.TransactionId)
             .Replace(ReplaceConstance.TransactionDateTimeLocal, DateTimeHelper.ToUiFormat(option.TransactionDateTime))
-            .Replace(ReplaceConstance.TravelDirection, DirectionUiStringBuilder(option.TravelDirection))
-            .Replace(ReplaceConstance.OtherLocations, OtherLocationsUiStringBuilder(option.TravelDirection));
+            .Replace(ReplaceConstance.TravelDirection, DirectionUiStringBuilder(option.TravelRoute))
+            .Replace(ReplaceConstance.OtherLocations, OtherLocationsUiStringBuilder(option.TravelRoute));
 
         var newName = name.Replace(ReplaceConstance.OrderId, orderId);
         await _templateProvider.WriteContentAsync(newName, newContent);
     }
 
-    private static string DirectionUiStringBuilder(TravelDirection travelDirection)
+    private static string DirectionUiStringBuilder(TravelRoutes travelRoute)
     {
-        return travelDirection switch
+        return travelRoute switch
         {
-            TravelDirection.Whistler_to_YVR => "Whistler to Vancouver Airport (YVR)",
-            TravelDirection.YVR_to_Whistler => "Vancouver Airport (YVR) to Whistler",
+            TravelRoutes.Whistler_to_YVR => "Whistler to Vancouver Airport (YVR)",
+            TravelRoutes.YVR_to_Whistler => "Vancouver Airport (YVR) to Whistler",
+            TravelRoutes.Whistler_to_Vancouver => "Whistler to Vancouver Downtown",
+            TravelRoutes.Vancouver_to_Whistler => "Vancouver Downtown to Whistler",
             _ => "+++++++++++ ERROR: NO DIRECTION FOUND +++++++++++"
         };
     }
 
-    private static string OtherLocationsUiStringBuilder(TravelDirection travelDirection)
+    private static string OtherLocationsUiStringBuilder(TravelRoutes travelRoute)
     {
-        return travelDirection switch
+        return travelRoute switch
         {
-            TravelDirection.Whistler_to_YVR => "&quot;Other Locations&quot; Pickup Service Per Trip",
-            TravelDirection.YVR_to_Whistler => "&quot;Other Locations&quot; Dropoff Service Per Trip",
+            TravelRoutes.Whistler_to_YVR => "&quot;Other Locations&quot; Pickup Service Per Trip",
+            TravelRoutes.YVR_to_Whistler => "&quot;Other Locations&quot; Dropoff Service Per Trip",
+            TravelRoutes.Whistler_to_Vancouver => "&quot;Other Locations&quot; Pickup Service Per Trip",
+            TravelRoutes.Vancouver_to_Whistler => "&quot;Other Locations&quot; Dropoff Service Per Trip",
             _ => "+++++++++++ ERROR: NO OTHER LOCATIONS FOUND +++++++++++"
         };
     }

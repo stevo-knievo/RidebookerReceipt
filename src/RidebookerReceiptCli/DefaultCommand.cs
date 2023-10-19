@@ -22,7 +22,8 @@ public sealed class DefaultCommand : AsyncCommand<Settings>
         var transactionDate = AskDateIfMissing(settings.TransactionDate);
         var transactionHour = AskHourIfMissing(settings.TransactionHour);
         var travelDirection = AskTravelDirectionIfMissing(settings.TravelDirection);
-        
+        var travelRoute = AskTravelRouteIfMissing(settings.TravelRoute);
+
         // Prepare data
         var orderId = OrderIdHelper.GetId();
         var transactionId = TransactionIdHelper.GetId();
@@ -34,7 +35,7 @@ public sealed class DefaultCommand : AsyncCommand<Settings>
         if (travelDirection == TravelDirection.RoundTrip)
         {
             // First transaction
-            options.Add(new ReceiptCreateOption(transactionDateTime, emailReceivedDateTime, orderId, transactionId, TravelDirection.Whistler_to_YVR));
+            options.Add(new ReceiptCreateOption(transactionDateTime, emailReceivedDateTime, orderId, transactionId, travelRoute));
 
             // Second transaction
             var secondTransactionDateTime = DateTimeHelper.AddSecondTransactionRandomnessReceivedDateTime(transactionDateTime);
@@ -42,29 +43,29 @@ public sealed class DefaultCommand : AsyncCommand<Settings>
             var secondTransactionId = TransactionIdHelper.GetId();
             var secondOrderId = OrderIdHelper.GetNextId(orderId);
             options.Add(new ReceiptCreateOption(
-                secondTransactionDateTime, 
+                secondTransactionDateTime,
                 secondEmailReceivedDateTime,
                 secondOrderId,
                 secondTransactionId,
-                TravelDirection.YVR_to_Whistler));
+                travelRoute.GetReturnRoute()));
         }
         else
         {
-            options.Add(new ReceiptCreateOption(transactionDateTime, emailReceivedDateTime, orderId, transactionId, travelDirection));
+            options.Add(new ReceiptCreateOption(transactionDateTime, emailReceivedDateTime, orderId, transactionId, travelRoute));
         }
 
         WriteSummary(options);
-        
+
         var proceedWithSettings = _console.Prompt(
             new SelectionPrompt<bool> {Converter = value => value ? "Yes" : "No"}
                 .Title("Proceed with the aforementioned settings?")
                 .AddChoices(true, false));
-        
+
         if (!proceedWithSettings)
         {
             return 1;
         }
-        
+
         foreach (var option in options)
         {
             var templateName = "[ORDER_ID] Payment Receipt.eml";
@@ -79,14 +80,14 @@ public sealed class DefaultCommand : AsyncCommand<Settings>
     {
         foreach (var option in options)
         {
-            _console.Write(new Text($"Trip: {option.TravelDirection.ToString()}\n"));
+            _console.Write(new Text($"Trip: {option.TravelRoute.ToString()}\n"));
             _console.Write(
                 new Table()
                     .AddColumn(new TableColumn("Settings"))
                     .AddColumn(new TableColumn("Value"))
                     .AddRow("Transaction datetime", option.TransactionDateTime.ToString("F"))
                     .AddRow("Email received datetime", option.EmailReceivedDateTime.ToString("F"))
-                    .AddRow("Travel direction", option.TravelDirection.ToString())
+                    .AddRow("Travel direction", option.TravelRoute.ToString())
                     .AddRow("OderId", option.OrderId.ToString())
                     .AddRow("TransactionId", option.TransactionId)
             );
@@ -98,11 +99,20 @@ public sealed class DefaultCommand : AsyncCommand<Settings>
             new SelectionPrompt<TravelDirection>()
                 .Title("For which direction should the receipt be?")
                 .AddChoices(
-                    TravelDirection.RoundTrip,
-                    TravelDirection.Whistler_to_YVR,
-                    TravelDirection.YVR_to_Whistler
+                    TravelDirection.OneWayTrip,
+                    TravelDirection.RoundTrip
                     ));
-    
+
+    private TravelRoutes AskTravelRouteIfMissing(TravelRoutes? current) =>
+        current ?? _console.Prompt(
+            new SelectionPrompt<TravelRoutes>()
+                .Title("For which route should the receipt be?")
+                .AddChoices(
+                    TravelRoutes.Whistler_to_YVR,
+                    TravelRoutes.YVR_to_Whistler,
+                    TravelRoutes.Whistler_to_Vancouver,
+                    TravelRoutes.Vancouver_to_Whistler
+                ));
 
     private string AskDateIfMissing(string? current)
     {
@@ -117,9 +127,9 @@ public sealed class DefaultCommand : AsyncCommand<Settings>
                 .Validate(date => DateTimeHelper.IsValidDateFormat(date)
                     ? ValidationResult.Success()
                     : ValidationResult.Error("Not a valid date (Format: YYYY-MM-dd).")));
-     
+
     }
-    
+
     private int AskHourIfMissing(int? current)
     {
         if (current.HasValue && IsClockHour(current.Value))
@@ -133,7 +143,7 @@ public sealed class DefaultCommand : AsyncCommand<Settings>
                 .Validate(x => IsClockHour(x)
                     ? ValidationResult.Success()
                     : ValidationResult.Error("Not a valid hour (0-23).")));
-     
+
     }
 
     private bool IsClockHour(int hour) => hour is >= 0 and <= 23;

@@ -12,7 +12,7 @@ public class ReceiptBuilderTests
         const string transactionId = "123456789ABCD";
         var transactionDateTime = DateTimeHelper.ConvertToDateTimeOffset("2023-01-15 13:13:10");
         var emailReceivedDateTime = DateTimeHelper.ConvertToDateTimeOffset("2023-01-15 13:23:10");
-        var option = new ReceiptCreateOption(transactionDateTime, emailReceivedDateTime, orderId, transactionId, TravelDirection.Whistler_to_YVR);
+        var option = new ReceiptCreateOption(transactionDateTime, emailReceivedDateTime, orderId, transactionId, TravelRoutes.Whistler_to_YVR);
         var receiptBuilder = new ReceiptBuilder(new InMemoryTemplateProvider(s => AssertOnContentWritten(s, transactionDateTime, emailReceivedDateTime)));
 
         // Act

@@ -5,4 +5,4 @@ public record ReceiptCreateOption(
     DateTimeOffset EmailReceivedDateTime,
     int OrderId,
     string TransactionId,
-    TravelDirection TravelDirection);
+    TravelRoutes TravelRoute);
