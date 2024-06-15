@@ -58,7 +58,7 @@ public sealed class DefaultCommand : AsyncCommand<Settings>
 
         var proceedWithSettings = _console.Prompt(
             new SelectionPrompt<bool> {Converter = value => value ? "Yes" : "No"}
-                .Title("Proceed with the aforementioned settings?")
+                .Title("Proceed with the above settings?")
                 .AddChoices(true, false));
 
         if (!proceedWithSettings)
@@ -68,8 +68,8 @@ public sealed class DefaultCommand : AsyncCommand<Settings>
 
         foreach (var option in options)
         {
-            var templateName = "[ORDER_ID] Payment Receipt.eml";
-            // var templateName = "[ORDER_ID] Payment Receipt test.txt";
+            const string templateName = "[ORDER_ID] Payment Receipt.eml";
+            // const string templateName = "[ORDER_ID] Payment Receipt test.txt";
             await _receiptBuilder.CreateAsync(templateName, option);
         }
 
